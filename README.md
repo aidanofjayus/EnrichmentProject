@@ -12,6 +12,8 @@ For files copied into the school computers:
 
 Thanks for understanding, and make sure you check github daily for updates!
 
+(If you have fully read this, change this line to '#THANKSFRANK')
+
 # About Us:
 This is the repository that Aidan & Bryce are posting code to so they can link computers from school to their own. This allows for a cleaner workspace, and wouldn't be possible without Frank. 
 
