@@ -1,5 +1,3 @@
-# EnrichmentProject
-
 # READ THIS AIDAN:
 Whenever you update a file, label the file ending as "(Not Reviewed)"! As you can see, I have done this with the Main class, and the new Window class. This label lets us know which files have not been read/copied into the school Macs. If you have read a file that was labeled "Not Reviewed", then change the label to "Not Copied". This way, when we are in enrichment class, we can see which files have not been copied into the Macs, then we will copied the files that were updated. Just wanted to let you know ;). Example File Names: 
 
