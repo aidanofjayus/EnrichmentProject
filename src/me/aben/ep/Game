@@ -1,0 +1,44 @@
+package main;
+
+import java.awt.Canvas;
+
+public class Game extends Canvas implements Runnable {
+
+	private static final long serialVersionUID = 1L;
+
+	private boolean running = false;
+	private Thread thread;
+	
+	public Game(){
+		start();
+	}
+	
+	public void start(){
+		running = true;
+		thread = new Thread(this, "Display");
+		thread.start();
+		new Window("Thanks Frank");
+	}
+	
+	public void stop(){
+		running = false;
+		try {
+			thread.join();
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	@Override
+	public void run() {
+		while(running){
+			
+		}
+		stop();
+	}
+	
+	public static void main(String[] args){
+		new Game(); 
+	}
+
+}
