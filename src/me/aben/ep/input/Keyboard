@@ -1,4 +1,6 @@
 package me.aben.ep.input;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 public class Keyboard implements KeyListener{
 	public boolean[] keys = new boolean[120];
 	
