@@ -9,8 +9,14 @@ public class Main extends Canvas implements Runnable {
 	private boolean running = false;
 	private Thread thread;
 	
+	private Mouse mouse;
+	
 	public Main(){
 		start();
+		
+		mouse = new Mouse();
+		
+		addMouseListener(mouse);
 	}
 	
 	public void start(){
