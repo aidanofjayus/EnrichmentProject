@@ -2,14 +2,14 @@ package main;
 
 import java.awt.Canvas;
 
-public class Game extends Canvas implements Runnable {
+public class Main extends Canvas implements Runnable {
 
 	private static final long serialVersionUID = 1L;
 
 	private boolean running = false;
 	private Thread thread;
 	
-	public Game(){
+	public Main(){
 		start();
 	}
 	
@@ -38,7 +38,7 @@ public class Game extends Canvas implements Runnable {
 	}
 	
 	public static void main(String[] args){
-		new Game(); 
+		new Main(); 
 	}
 
 }
