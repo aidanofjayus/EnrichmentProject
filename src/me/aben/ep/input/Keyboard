@@ -1,0 +1,16 @@
+package me.aben.ep.input;
+public class Keyboard implements KeyListener{
+	public boolean[] keys = new boolean[120];
+	
+	public void update() {
+	}
+	
+	public void keyPressed(KeyEvent e) {
+	}
+
+	public void keyReleased(KeyEvent e) {
+	}
+
+	public void keyTyped(KeyEvent e) {
+	}	
+}
