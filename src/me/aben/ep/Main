@@ -2,14 +2,14 @@ package me.aben.ep;
 
 import java.awt.Canvas;
 
-public class Game extends Canvas implements Runnable {
+public class Main extends Canvas implements Runnable {
 
 	private static final long serialVersionUID = 1L;
 
 	private boolean running = false;
 	private Thread thread;
 
-	public Game() {
+	public Main() {
 		start();
 	}
 
@@ -45,13 +45,11 @@ public class Game extends Canvas implements Runnable {
 		double delta = 0;
 		int frames = 0;
 		int updates = 0;
-
-		while (running) {
+		while(running) {
 			long now = System.nanoTime();
-			delta += (now - lastTime) / ns;
-			lastTime = now;
-
-			while (delta >= 1) {
+			delta+=(now-lastTime) / ns;
+			lastTime=now;
+			while(delta >= 1) {
 				updates++;
 				update();
 				delta--;
@@ -59,19 +57,17 @@ public class Game extends Canvas implements Runnable {
 			render();
 			frames++;
 			
-			System.out.println(frames);
-			
-			if (System.currentTimeMillis() - timer > 1000) {
+			if(System.currentTimeMillis() - timer > 1000){
 				timer += 1000;
-				updates = 0;
-				frames = 0;
+				updates=0;
+				frames=0;
 			}
-
 		}
+		stop();
 	}
 
 	public static void main(String[] args) {
-		new Game();
+		new Main();
 	}
 
 }
