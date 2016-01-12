@@ -1,11 +1,9 @@
-package net.neuroinc.clicker.input;	
+package me.aben.ep.input;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseWheelEvent;
 import java.awt.event.MouseWheelListener;
 
-import net.neuroinc.clicker.Game;
-import net.neuroinc.clicker.GameState;
 public class Mouse implements MouseListener, MouseWheelListener{
 	public void mouseClicked(MouseEvent e) {
 	}
