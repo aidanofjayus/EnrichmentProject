@@ -8,8 +8,10 @@ Note that this is the project setup in eclipse, not in github. Github simply hol
 
 EnrichmentProject >
   src >
-    main >
-      Main.java (Outdated)
+    me >
+      aben >
+        ep >
+          Main.java
       
       
 # How To Document Code: 
