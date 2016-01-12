@@ -1,5 +1,5 @@
-package main;
-
+package me.aben.ep;
+import javax.swing.JFrame;
 public class Window extends JFrame {
 
   public Window(String title){
