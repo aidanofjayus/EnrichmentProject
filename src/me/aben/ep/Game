@@ -36,8 +36,8 @@ public class Game extends JPanel implements Runnable, KeyListener {
 		}
 		window = new Window("Thanks Frank");
 		window.add(this);
-		image = new BufferedImage(window.getWidth(), window.getHeight(), BufferedImage.TYPE_INT_RGB);
-		g = (Graphics2D) g;
+		image = new BufferedImage(Window.WIDTH, Window.HEIGHT, BufferedImage.TYPE_INT_RGB);
+		g = (Graphics2D) image.getGraphics();
 		stateManager = new StateManager();
 		running = true;
 	}
