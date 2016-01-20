@@ -8,15 +8,15 @@ public class Window extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 
-	public static int scale = 2;
-	public static int height = 270 * scale;
-	public static int width = 450 * scale;
+	public static int SCALE = 2;
+	public static int HEIGHT = 270 * SCALE;
+	public static int WIDTH = 450 * SCALE;
 
 	public Window(String title) {
 		super(title);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setResizable(false);
-		setSize(new Dimension(width, height));
+		setSize(new Dimension(WIDTH, HEIGHT));
 		setPreferredSize(new Dimension(width, height));
 		setLocationRelativeTo(null);
 		setVisible(true);
