@@ -1,23 +1,45 @@
 package me.aben.ep;
 
-import java.awt.Canvas;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
+import java.awt.image.BufferedImage;
 
-public class Game extends Canvas implements Runnable {
+import javax.swing.JPanel;
+
+import me.aben.ep.states.StateManager;
+
+public class Game extends JPanel implements Runnable, KeyListener {
 
 	private static final long serialVersionUID = 1L;
 
+	private Window window;
 	private boolean running = false;
 	private Thread thread;
 
+	private BufferedImage image;
+	private Graphics2D g;
+	
+	private StateManager stateManager;
+
 	public Game() {
+		super();
 		start();
 	}
 
 	public void start() {
+		if (thread == null) {
+			thread = new Thread(this, "Display");
+			addKeyListener(this);
+			thread.start();
+		}
+		window = new Window("Thanks Frank");
+		window.add(this);
+		image = new BufferedImage(window.getWidth(), window.getHeight(), BufferedImage.TYPE_INT_RGB);
+		g = (Graphics2D) g;
+		stateManager = new StateManager();
 		running = true;
-		thread = new Thread(this, "Display");
-		thread.start();
-		new Window("Thanks Frank");
 	}
 
 	public void stop() {
@@ -29,42 +51,53 @@ public class Game extends Canvas implements Runnable {
 		}
 	}
 
-	public void update() {
-
-	}
-
-	public void render() {
-
-	}
-
 	@Override
 	public void run() {
-		long lastTime = System.nanoTime();
-		long timer = System.currentTimeMillis();
-		final double ns = 1000000000.0 / 60.0;
-		double delta = 0;
-		int frames = 0;
-		int updates = 0;
+		long start, elapsed, wait;
 		while (running) {
-			long now = System.nanoTime();
-			delta += (now - lastTime) / ns;
-			lastTime = now;
-			while (delta >= 1) {
-				updates++;
-				update();
-				delta--;
-			}
+			start = System.nanoTime();
+			update();
+			draw();
 			render();
-			frames++;
-			System.out.println(frames);
-
-			if (System.currentTimeMillis() - timer > 1000) {
-				timer += 1000;
-				updates = 0;
-				frames = 0;
+			elapsed = System.nanoTime() - start;
+			wait = 1000 - elapsed / 1000000;
+			
+			try {
+				Thread.sleep(wait);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
 			}
 		}
 		stop();
+	}
+	
+	public void update() {
+		stateManager.update();
+	}
+
+	public void draw() {
+		stateManager.draw(g);
+	}
+	
+	public void render(){
+		Graphics g2 = getGraphics();
+		g2.drawImage(image, 0, 0, null);
+		g2.dispose();
+	}
+
+	@Override
+	public void keyPressed(KeyEvent k) {
+		stateManager.keyPressed(k.getKeyCode());
+	}
+
+	@Override
+	public void keyReleased(KeyEvent k) {
+		stateManager.keyReleased(k.getKeyCode());
+	}
+
+	@Override
+	public void keyTyped(KeyEvent k) {
+
 	}
 
 	public static void main(String[] args) {
