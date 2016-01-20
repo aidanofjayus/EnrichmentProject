@@ -1,14 +1,25 @@
 package me.aben.ep;
+
+import java.awt.Dimension;
+
 import javax.swing.JFrame;
+
 public class Window extends JFrame {
 
-  public Window(String title){
-    super(title);
-    setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-    setResizable(false);
-    setSize(600, 400);
-    setLocationRelativeTo(null);
-    setVisible(true);
-  }
+	private static final long serialVersionUID = 1L;
+
+	public static int scale = 2;
+	public static int height = 270 * scale;
+	public static int width = 450 * scale;
+
+	public Window(String title) {
+		super(title);
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setResizable(false);
+		setSize(new Dimension(width, height));
+		setPreferredSize(new Dimension(width, height));
+		setLocationRelativeTo(null);
+		setVisible(true);
+	}
 
 }
