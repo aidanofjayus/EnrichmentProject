@@ -1,5 +1,6 @@
 package me.aben.ep.states;
 
+import java.awt.Color;
 import java.awt.Graphics2D;
 
 import me.aben.ep.Background;
@@ -10,6 +11,8 @@ public class MenuState extends GameState {
 	
 	public MenuState(StateManager stateManager){
 		this.stateManager = stateManager;
+		bg = new Background("/background_image_temp.gif", 1);
+		bg.setVector(-0.1, 0);
 	}
 	
 	@Override
@@ -19,12 +22,15 @@ public class MenuState extends GameState {
 
 	@Override
 	public void update() {
-		
+		bg.update();
 	}
 
 	@Override
 	public void draw(Graphics2D g) {
+		bg.draw(g);
 		
+		g.setColor(new Color(35, 34, 184));
+		g.drawString("Sample Title", 100, 100);
 	}
 
 	@Override
