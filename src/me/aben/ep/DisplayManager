@@ -1,0 +1,18 @@
+package main;
+
+import javax.swing.JFrame;
+
+public class DisplayManager {
+
+	public DisplayManager() {
+		JFrame frame = new JFrame();
+		JFrame game = new JFrame();
+		game.setContentPane(new Game());
+		game.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		game.setResizable(false);
+		game.pack();
+		game.setLocationRelativeTo(null);
+		game.setVisible(true);
+	}
+
+}
