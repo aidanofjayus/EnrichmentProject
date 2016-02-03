@@ -1,5 +1,6 @@
-package me.aben.ep;
+package main;
 
+import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.event.KeyEvent;
@@ -8,35 +9,43 @@ import java.awt.image.BufferedImage;
 
 import javax.swing.JPanel;
 
-import me.aben.ep.states.StateManager;
+import states.StateManager;
 
 public class Game extends JPanel implements Runnable, KeyListener {
 
 	private static final long serialVersionUID = 1L;
 
-	private Window window;
-	private boolean running = false;
+	public static final int WIDTH = 420;
+	public static final int HEIGHT = 240;
+	public static final int SCALE = 2;
+
 	private Thread thread;
+	private boolean running = false;
+	private long targetTime = 1000 / 60;
 
 	private BufferedImage image;
 	private Graphics2D g;
-	
+
 	private StateManager stateManager;
 
 	public Game() {
 		super();
-		start();
+		setPreferredSize(new Dimension(WIDTH * SCALE, HEIGHT * SCALE));
+		setFocusable(true);
+		requestFocus();
 	}
 
-	public void start() {
+	public void addNotify() {
+		super.addNotify();
 		if (thread == null) {
-			thread = new Thread(this, "Display");
+			thread = new Thread(this);
 			addKeyListener(this);
 			thread.start();
 		}
-		window = new Window("Thanks Frank");
-		window.add(this);
-		image = new BufferedImage(Window.WIDTH, Window.HEIGHT, BufferedImage.TYPE_INT_RGB);
+	}
+
+	public void start() {
+		image = new BufferedImage(WIDTH, HEIGHT, BufferedImage.TYPE_INT_RGB);
 		g = (Graphics2D) image.getGraphics();
 		stateManager = new StateManager();
 		running = true;
@@ -46,6 +55,7 @@ public class Game extends JPanel implements Runnable, KeyListener {
 		running = false;
 		try {
 			thread.join();
+			System.out.println("Closing the enrichment project...");
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
@@ -53,6 +63,7 @@ public class Game extends JPanel implements Runnable, KeyListener {
 
 	@Override
 	public void run() {
+		start();
 		long start, elapsed, wait;
 		while (running) {
 			start = System.nanoTime();
@@ -60,48 +71,41 @@ public class Game extends JPanel implements Runnable, KeyListener {
 			draw();
 			render();
 			elapsed = System.nanoTime() - start;
-			wait = 1000 - elapsed / 1000000;
-			
+			wait = targetTime - elapsed / 1000000;
+			if (wait < 0)
+				wait = 0;
 			try {
 				Thread.sleep(wait);
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
 		}
-		stop();
 	}
 	
-	public void update() {
+	private void update() {
 		stateManager.update();
 	}
 
-	public void draw() {
+	private void draw() {
 		stateManager.draw(g);
 	}
 	
-	public void render(){
+	private void render() {
 		Graphics g2 = getGraphics();
-		g2.drawImage(image, 0, 0, null);
+		g2.drawImage(image, 0, 0, WIDTH * SCALE, HEIGHT * SCALE, null);
 		g2.dispose();
 	}
 
-	@Override
-	public void keyPressed(KeyEvent k) {
-		stateManager.keyPressed(k.getKeyCode());
+	public void keyPressed(KeyEvent key) {
+		stateManager.keyPressed(key.getKeyCode());
 	}
 
-	@Override
-	public void keyReleased(KeyEvent k) {
-		stateManager.keyReleased(k.getKeyCode());
+	public void keyReleased(KeyEvent key) {
+		//stateManager.keyReleased(key.getKeyCode());
 	}
 
-	@Override
-	public void keyTyped(KeyEvent k) {
-
-	}
-
-	public static void main(String[] args) {
-		new Game();
+	public void keyTyped(KeyEvent key) {
+		
 	}
 
 }
