@@ -1,4 +1,4 @@
-package me.aben.ep.states;
+package states;
 
 import java.awt.Graphics2D;
 import java.util.ArrayList;
@@ -20,7 +20,6 @@ public class StateManager {
 	
 	public void setState(int state){
 		currentState = state;
-		gameStates.get(currentState).init();
 	}
 	
 	public void update(){
@@ -40,3 +39,4 @@ public class StateManager {
 	}
 	
 }
+
