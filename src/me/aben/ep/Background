@@ -1,4 +1,4 @@
-package me.aben.ep;
+package main;
 
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
@@ -7,15 +7,16 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 
 public class Background {
-
+	
 	private BufferedImage image;
 	
-	private double x, y, dx, dy, moveScale;
+	private double x, y, dx, dy;
+	
+	private double moveScale;
 	
 	public Background(String s, double ms){
 		try {
 			image = ImageIO.read(getClass().getResourceAsStream(s));
-			moveScale = ms;
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -38,12 +39,10 @@ public class Background {
 	
 	public void draw(Graphics2D g){
 		g.drawImage(image, (int)x, (int)y, null);
-		if(x < 0){
+		if(x < 0)
 			g.drawImage(image, (int)x + Game.WIDTH, (int)y, null);
-		}
-		if(x > 0){
+		if(x > 0)
 			g.drawImage(image, (int)x - Game.WIDTH, (int)y, null);
-		}
 	}
 	
 }
