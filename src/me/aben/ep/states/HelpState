@@ -4,19 +4,27 @@ import java.awt.Graphics2D;
 
 public class HelpState extends GameState {
 
+        private Background bg;
+
+        public HelpState(){
+           bg = new Background("", 1);
+        }
+
 	@Override
 	public void update() {
-		
+           bg.update();
 	}
 
 	@Override
 	public void draw(Graphics2D g) {
-		
+           bg.draw(g);
 	}
 
 	@Override
 	public void keyPressed(int k) {
-		
+	   if(k == KeyEvent.VK_ESCAPE){
+           
+           }
 	}
 
 	@Override
