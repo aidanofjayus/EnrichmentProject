@@ -1,10 +1,14 @@
-package states;
+package me.aben.ep.states;
 
 import java.awt.Graphics2D;
 
 public abstract class GameState {
+	
 
 	protected StateManager stateManager;
+	protected int menu=1;
+	protected int tutorial=2;
+	protected int help=3;
 	
 	public abstract void update(); 
 	public abstract void draw(Graphics2D g); 
