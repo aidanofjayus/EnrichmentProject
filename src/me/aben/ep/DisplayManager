@@ -1,9 +1,10 @@
-package main;
+package me.aben.ep;
 
 import javax.swing.JFrame;
 
 public class DisplayManager {
 
+	// with login class
 	public DisplayManager() {
 		JFrame frame = new JFrame();
 		JFrame game = new JFrame();
@@ -13,6 +14,11 @@ public class DisplayManager {
 		game.pack();
 		game.setLocationRelativeTo(null);
 		game.setVisible(true);
+	}
+
+	// without
+	public static void main(String[] args) {
+		new DisplayManager();
 	}
 
 }
