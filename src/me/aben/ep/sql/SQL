@@ -1,7 +1,23 @@
 package me.aben.ep.sql;
 import java.sql.Connection;
 public class SQL {
-	private Connection connection;
+	public static Connection connection;
+
+	public synchronized static void openConnection() {
+		try {
+			connection = DriverManager.getConnection("jdbc:mysql://66.85.144.162:3306/mcph489470", "mcph489470", "02d832deaf");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	public synchronized static void closeConnection() {
+		try {
+			connection.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
 
 	public SQL() {
 
